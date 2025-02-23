@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0l14e!z6_nh(6l&*uda%v$^49ad5bfq+6rz=ys^s1d$8)v**h*'
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = str(os.environ.get('DEBUG')) == "1"
 
 ALLOWED_HOSTS = []
 
@@ -79,6 +79,29 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+DB_USERNAME = os.environ.get('POSTGRES_USER')
+DB_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+DB_HOST = os.environ.get('POSTGRES_HOST')
+DB_PORT = os.environ.get('POSTGRES_PORT')
+DB_DATABASE = os.environ.get('POSTGRES_DB')
+POSTGRES_READY = str(os.environ.get('POSTGRES_READY')) == "1"
+
+DB_IS_AVAIL = all([DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE, POSTGRES_READY])
+
+if DB_IS_AVAIL :
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': DB_DATABASE,
+            'USER': DB_USERNAME,
+            'PASSWORD': DB_PASSWORD,
+            'HOST': DB_HOST,
+            'PORT': DB_PORT,
+        }
+    }
+
+
 
 
 # Password validation
