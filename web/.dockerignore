@@ -147,3 +147,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# kub8 clusterconfig files
+*kubeconfig.yaml 

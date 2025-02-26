@@ -14,18 +14,18 @@ services:
     ports:
       - "8001:8000"  
     command: sh -c "chmod +x /app/migrate.sh && sh /app/migrate.sh && /app/entrypoint.sh"
-#     volumes:
-#        - staticfiles:/app/staticfiles/
+    volumes:
+       - staticfiles:/app/staticfiles/
   postgres_db:
     image: postgres
     restart: always
-    command: -p 5434
+    command: -p 5432
     env_file:
       - web/.env
-    expose:
-      - 5434
+    # expose:
+    #   - 5432
     ports:
-      - "5434:5434"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 #   redis_db:
@@ -41,7 +41,7 @@ services:
 
 
 volumes:
-#   # staticfiles:
-#   #     external: true
+  staticfiles:
+      external: true
   postgres_data:
 #   redis_data: 
