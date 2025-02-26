@@ -4,3 +4,5 @@
 
 2) Created the .env file with Django, databases configurations and use dotenv to read them in wsgi and manage
 3) update settings.py to use PostgreSQL when ready
+
+#### Docker File 
