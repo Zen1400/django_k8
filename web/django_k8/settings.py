@@ -23,7 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.environ.get('DEBUG')) == "1"
+
+DEBUG = True
+# DEBUG = str(os.environ.get('DEBUG')) == "1"
 
 ALLOWED_HOSTS = []
 
@@ -87,7 +89,7 @@ DB_PORT = os.environ.get('POSTGRES_PORT')
 DB_DATABASE = os.environ.get('POSTGRES_DB')
 POSTGRES_READY = str(os.environ.get('POSTGRES_READY')) == "1"
 
-DB_IS_AVAIL = all([DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE, POSTGRES_READY])
+DB_IS_AVAIL = all([DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE])
 
 if DB_IS_AVAIL :
     DATABASES = {

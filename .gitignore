@@ -1,6 +1,7 @@
 .env
 .DS_Store
 .env.prod
+.envrc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -147,3 +148,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# kuber cluster config
+*kubeconfig.yaml 
